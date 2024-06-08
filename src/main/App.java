@@ -1,6 +1,5 @@
 package main;
 
-import javax.swing.JFrame;
 import javax.swing.*;
 import java.net.URL;
 
@@ -12,7 +11,7 @@ public class App {
        
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false); // window is not resizable
-        frame.setTitle("Game Test");
+        frame.setTitle("TBD");
 
         GamePanel gamePanel = new GamePanel();
         frame.add(gamePanel);
@@ -24,7 +23,7 @@ public class App {
 
         JLabel bg = new JLabel("",new ImageIcon(bg_url),JLabel.CENTER);
         bg.setSize(gamePanel.width,gamePanel.height);
-        bg.setBounds(0,0,1024,768);
+        bg.setBounds(0,0,gamePanel.width,gamePanel.height);
         
         frame.add(bg);
 

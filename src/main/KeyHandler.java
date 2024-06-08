@@ -1,6 +1,5 @@
 package main;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.*;
 
 public class KeyHandler implements KeyListener{
     
@@ -18,25 +17,25 @@ public class KeyHandler implements KeyListener{
     }
 
     public void keyPressed(KeyEvent e) {
-            int code = e.getKeyCode();
-            if(code == KeyEvent.VK_W) {
-                upPressed = true;
+        int code = e.getKeyCode();
+        if(code == KeyEvent.VK_W) {
+            upPressed = true;
+        }
+        if(code == KeyEvent.VK_A) {
+            leftPressed = true;
+        }
+        if(code == KeyEvent.VK_S) {
+            downPressed = true;
+        }
+        if(code == KeyEvent.VK_D) {
+            rightPressed = true;
+        }
+        if(code == KeyEvent.VK_F || code == KeyEvent.VK_B) {
+            if (gp.determineCollision() > 0 && gp.gameState == gp.playing) {
+                gp.gameState = gp.dialogue;
             }
-            if(code == KeyEvent.VK_A) {
-                leftPressed = true;
-            }
-            if(code == KeyEvent.VK_S) {
-                downPressed = true;
-            }
-            if(code == KeyEvent.VK_D) {
-                rightPressed = true;
-            }
-            if(code == KeyEvent.VK_F || code == KeyEvent.VK_B) {
-                if (gp.determineCollision() > 0 && gp.gameState == gp.playing) {
-                    gp.gameState = gp.dialogue;
-                }
 
-            }
+        }
     }
 
     public void keyReleased(KeyEvent e) {

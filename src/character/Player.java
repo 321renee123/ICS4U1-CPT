@@ -1,7 +1,6 @@
 package character;
-import main.GamePanel;
-import main.KeyHandler;
-import java.awt.Graphics2D;
+import main.*;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class Player extends Character{
