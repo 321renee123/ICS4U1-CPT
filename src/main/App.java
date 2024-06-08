@@ -2,6 +2,7 @@ package main;
 
 import javax.swing.JFrame;
 import javax.swing.*;
+import java.net.URL;
 
 public class App {
 
@@ -19,7 +20,9 @@ public class App {
         
         frame.setLayout(null);
 
-        JLabel bg = new JLabel("",new ImageIcon("C:\\\\Users\\\\renee\\\\workspace\\\\ICS4U1-CPT\\\\src\\\\res\\\\background\\\\bg2.jpg"),JLabel.CENTER);
+        URL bg_url = App.class.getResource("/res/background/bg2.jpg");
+
+        JLabel bg = new JLabel("",new ImageIcon(bg_url),JLabel.CENTER);
         bg.setSize(gamePanel.width,gamePanel.height);
         bg.setBounds(0,0,1024,768);
         
