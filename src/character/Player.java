@@ -38,13 +38,14 @@ public class Player extends Character{
             x += speed;
         }
     }
+
     public void draw(Graphics2D g2) {
 
         BufferedImage image = sprite;
-        g2.drawImage(image, x, y, gp.displayedTile, gp.displayedTile, null);
-
-        
+        g2.drawImage(image, x, y, gp.displayedTile, gp.displayedTile, null); 
     }
+
+    
 
     
 
