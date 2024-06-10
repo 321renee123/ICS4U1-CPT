@@ -18,7 +18,7 @@ public class GamePanel extends JPanel implements Runnable{
     int FPS = 60;
     Thread gameThread;
     KeyHandler keyH = new KeyHandler(this);
-    public UI ui = new UI(this);
+    public UI ui = new UI(this, keyH);
 
 
     // CHARACTER SETUP
