@@ -1,6 +1,5 @@
 package main;
 import java.awt.*;
-import character.voicelines.*;
 import java.io.*;
 import java.util.ArrayList;
 
@@ -13,15 +12,12 @@ public class UI {
 
     GamePanel gp;
     KeyHandler keyH;
-    Font courier_1;
+    Font courier_1;    
     int i = 0;
 
     public UI(GamePanel gp, KeyHandler keyH) {
         this.gp = gp;
         this.keyH = keyH;
-
-
-        
     } 
 
     public void draw(Graphics2D g2) {
@@ -33,16 +29,18 @@ public class UI {
         }
     }
 
-    public void displayFightText(Graphics2D g2) {
+    private void displayFightText(Graphics2D g2) {
         g2.setFont(new Font("Courier", Font.PLAIN, 30));
         g2.setColor(Color.red);
         if (gp.determineCollision() > 0) {
-            g2.drawString("Press [F] or to fight or [B] to befriend",140,700);
+            if (gp.hasFought(gp.determineCollision()) == false) {
+                g2.drawString("Press [F] to fight",350,700);
+            }
         }
     }
 
 
-    public ArrayList<String> getVoicelines() {
+    private ArrayList<String> getVoicelines() {
         ArrayList<String> allLines = new ArrayList<String>();
         String line;
 
@@ -60,7 +58,7 @@ public class UI {
         return allLines;
     }
 
-    public ArrayList<String> getBrokenLine(String line) {
+    private ArrayList<String> getBrokenLine(String line) {
         ArrayList<String> lineComponents = new ArrayList<String>();
         char character;
         String component = "";
@@ -84,7 +82,7 @@ public class UI {
         return lineComponents;
     }
 
-    public void displayDialogue(Graphics2D g2) {
+    private void displayDialogue(Graphics2D g2) {
         int x = gp.displayedTile*2;
         int y = gp.displayedTile/2;
         int width = gp.width - (gp.displayedTile*4);

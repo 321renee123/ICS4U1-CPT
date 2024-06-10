@@ -1,5 +1,7 @@
 package main;
 import java.awt.*;
+import java.util.ArrayList;
+
 import javax.swing.*;
 import character.*;
 
@@ -19,6 +21,7 @@ public class GamePanel extends JPanel implements Runnable{
     Thread gameThread;
     KeyHandler keyH = new KeyHandler(this);
     public UI ui = new UI(this, keyH);
+    boolean gameOver;
 
 
     // CHARACTER SETUP
@@ -27,6 +30,7 @@ public class GamePanel extends JPanel implements Runnable{
     OpponentTwo opp2 = new OpponentTwo(this);
     OpponentThree opp3 = new OpponentThree(this);
     OpponentFour opp4 = new OpponentFour(this);
+    ArrayList<Integer> completed = new ArrayList<Integer>();
 
 
 
@@ -35,7 +39,9 @@ public class GamePanel extends JPanel implements Runnable{
     public final int playing = 1;
     public final int dialogue = 2; 
     public final int minigame = 3;
-    public int gameState = playing;
+    public int gameState;
+
+
 
 
     public GamePanel() {
@@ -45,6 +51,9 @@ public class GamePanel extends JPanel implements Runnable{
         this.setDoubleBuffered(true); // improve rendering
         this.addKeyListener(keyH);
         this.setFocusable(true);
+
+        gameOver = false;
+        gameState = playing;
     }
 
     public void startGameThread() {
@@ -55,40 +64,65 @@ public class GamePanel extends JPanel implements Runnable{
     public void run() {
         double drawInterval =  1000000000/FPS; // 0.016666.... seconds
         double nextDrawTime = System.nanoTime() + drawInterval;
-        
-        while (gameThread != null) { // when thread is running
 
-            
+        do {
+            while (gameThread != null) { // when thread is running
 
-            // UPDATE: update info like change in character position
-            update();
-
-            // DRAW: draw the screen with updated info 
-            repaint();
-
-            try {
-                double remainingTime = nextDrawTime - System.nanoTime();
-                remainingTime = remainingTime/1000000;
-                if (remainingTime <0) {
-                    remainingTime = 0;
+                // UPDATE: update info like change in character position
+                update();
+    
+                // DRAW: draw the screen with updated info 
+                repaint();
+    
+                if (gameState == minigame) {
+                    break;
                 }
-
-                Thread.sleep((long) remainingTime);
-
-                nextDrawTime += drawInterval;
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+    
+                try {
+                    double remainingTime = nextDrawTime - System.nanoTime();
+                    remainingTime = remainingTime/1000000;
+                    if (remainingTime <0) {
+                        remainingTime = 0;
+                    }
+    
+                    Thread.sleep((long) remainingTime);
+    
+                    nextDrawTime += drawInterval;
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
+            switch (determineCollision()) {
+                case 1:
+                    break;
 
-        }
+                case 2:
+                    break;
 
-    }
+                case 3:
+                    break;
+
+                case 4:
+                    opp4.runMinigame();
+                    gameState = playing;
+                    break;
+            }
+        } while (gameOver = false);
+
+
+    } 
+
+    
 
     public void update() {
 
         if (gameState == playing) {
             player.update();
         }
+        if (gameState == dialogue) {
+
+        }
+
     }
 
     public void paintComponent(Graphics g){
@@ -122,4 +156,14 @@ public class GamePanel extends JPanel implements Runnable{
         return oppNum;
     }
     
+    public boolean hasFought(int opp) {
+        boolean fought = false;
+        for (int element : completed) {
+            if (opp == element) {
+                fought = true;
+                return fought;
+            }
+        }
+        return fought;
+    }
 }

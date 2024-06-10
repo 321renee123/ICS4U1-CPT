@@ -2,19 +2,29 @@ package character;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 
+
 import main.GamePanel;
+import minigames.PolygonGuessingGame;
 
 // polygon side counting game character
 // MegaGon the dinosaur
 
 public class OpponentFour extends Character {
 
+    // PolygonGuessing polygonGuessing = new PolygonGuessing();
+    public boolean completedRun;
+    private PolygonGuessingGame game = new PolygonGuessingGame();
+    private int score;
+
 
     public OpponentFour(GamePanel gp) {
         super(gp);
 
         setDefaultValues();
-        getOpponentImage();     
+        getOpponentImage();   
+        
+        completedRun = false;
+        score = 0;
     }
 
     public void setDefaultValues() {
@@ -32,4 +42,8 @@ public class OpponentFour extends Character {
         g2.drawImage(image, x, y, gp.displayedTile, gp.displayedTile, null);
     }
 
+    public void runMinigame() {
+        game.run();
+        score += 1;
+    }
 }

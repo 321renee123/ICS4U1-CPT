@@ -9,12 +9,18 @@ import main.GamePanel;
 
 public class OpponentOne extends Character {
 
+    public boolean completedRun;
+    public int livesLeft;
+    
 
     public OpponentOne(GamePanel gp) {
         super(gp);
 
         setDefaultValues();
         getOpponentImage();     
+
+        completedRun = false;
+        
     }
 
     public void setDefaultValues() {
@@ -32,4 +38,7 @@ public class OpponentOne extends Character {
         g2.drawImage(image, x, y, gp.displayedTile, gp.displayedTile, null);
     }
 
+    public void runMinigame() {
+        
+    }
 }

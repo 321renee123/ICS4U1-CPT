@@ -33,10 +33,11 @@ public class KeyHandler implements KeyListener{
             if(code == KeyEvent.VK_D) {
                 rightPressed = true;
             }
-            if(code == KeyEvent.VK_F || code == KeyEvent.VK_B) {
-                if (gp.determineCollision() > 0 && gp.gameState == gp.playing) {
+            if(code == KeyEvent.VK_F) {
+                if (gp.determineCollision() > 0 && gp.hasFought(gp.determineCollision()) == false) {
                     gp.gameState = gp.dialogue;
-                    System.out.println("Swtich occured");
+                    gp.completed.add(gp.determineCollision());
+                    
                 }
             }
         } 
