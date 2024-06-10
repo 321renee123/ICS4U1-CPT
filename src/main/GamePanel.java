@@ -14,9 +14,11 @@ public class GamePanel extends JPanel implements Runnable{
     final int width = displayedTile * col;
     final int height = displayedTile * row;
 
+    // SYSTEM SETUP
     int FPS = 60;
-    KeyHandler keyH = new KeyHandler(this);
     Thread gameThread;
+    KeyHandler keyH = new KeyHandler(this);
+    public UI ui = new UI(this);
 
 
     // CHARACTER SETUP
@@ -26,15 +28,14 @@ public class GamePanel extends JPanel implements Runnable{
     OpponentThree opp3 = new OpponentThree(this);
     OpponentFour opp4 = new OpponentFour(this);
 
-    // SYSTEM SETUP
-    public UI ui = new UI(this);
+
 
 
     // GAME STATE
-    public int gameState;
     public final int playing = 1;
     public final int dialogue = 2; 
     public final int minigame = 3;
+    public int gameState = playing;
 
 
     public GamePanel() {
@@ -46,11 +47,6 @@ public class GamePanel extends JPanel implements Runnable{
         this.setFocusable(true);
     }
 
-    public void setupGame() {
-        gameState = playing;
-    }
-
-
     public void startGameThread() {
         gameThread = new Thread(this);
         gameThread.start(); 
@@ -60,7 +56,6 @@ public class GamePanel extends JPanel implements Runnable{
         double drawInterval =  1000000000/FPS; // 0.016666.... seconds
         double nextDrawTime = System.nanoTime() + drawInterval;
         
-        setupGame();
         while (gameThread != null) { // when thread is running
 
             

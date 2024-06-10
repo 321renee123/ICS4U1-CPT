@@ -1,5 +1,6 @@
 package main;
 import java.awt.*;
+import character.voicelines.*;
 
 
 public class UI {
@@ -13,20 +14,27 @@ public class UI {
         courier_1 = new Font("Courier", Font.PLAIN, 30);    
     } 
 
+
+    public void update() {
+
+    }
+
     public void draw(Graphics2D g2) {
         this.g2 = g2;
         g2.setFont(courier_1);
         g2.setColor(Color.red);
 
-        switch (gp.gameState) {
-            case 1:
-                if (gp.determineCollision() > 0) {
-                    g2.drawString("Press [F] or to fight or [B] to befriend",140,700);
-                }
-                break;
-            case 2:
+        if (gp.gameState == gp.playing) {
+            displayFightText();
+        } else if (gp.gameState == gp.dialogue) {
 
-                break;
+
+        }
+    }
+
+    public void displayFightText() {
+        if (gp.determineCollision() > 0) {
+            g2.drawString("Press [F] or to fight or [B] to befriend",140,700);
         }
     }
 
