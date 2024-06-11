@@ -16,7 +16,6 @@ public class PolygonGuessingGame extends Minigame{
     private String userAns;
     private int numCorrect;
     private String result;
-    private int counter;
 
     KeyHandler keyH;
     Random rand = new Random();
@@ -25,9 +24,7 @@ public class PolygonGuessingGame extends Minigame{
         super(gp);
         this.keyH = keyH;
 
-        getRandomPolygon();
-        generateOptions();
-        createMultipleChoice();
+        getQuestion();
         opt1x = gp.displayedTile*3 ;
         opt2x = gp.displayedTile*7 ;
         opt3x = gp.displayedTile*11 -5;
@@ -40,9 +37,8 @@ public class PolygonGuessingGame extends Minigame{
 
     public void draw(Graphics2D g2) {
         if (gp.gameState == gp.minigame && gp.determineCollision() == 4) {
-            do {
-                showQuestion(g2);
-            } while (numCorrect < 5);  
+            showQuestion(g2);
+
         }
     }
 
@@ -82,6 +78,12 @@ public class PolygonGuessingGame extends Minigame{
         opt3 = usedPolygons.get(2);
     }
 
+    private void getQuestion() {
+        getRandomPolygon();
+        generateOptions();
+        createMultipleChoice();
+    }
+
 
     private void showQuestion(Graphics2D g2) {
         super.drawBackground(g2);
@@ -102,8 +104,26 @@ public class PolygonGuessingGame extends Minigame{
             g2.setFont(new Font("Courier",Font.PLAIN, 30));
             g2.setColor(Color.red);
             g2.drawString(result, gp.displayedTile*3 - 10, gp.displayedTile*9);
+            g2.drawString("Press [ENTER] to proceed", gp.displayedTile*3 - 10, gp.displayedTile*9 + 20);
+
+            if (keyH.nextPressed == true && numCorrect < 5) {
+                keyH.nextPressed = false;
+                userAns = null;
+                keyH.userAns = 0;
+                usedPolygons.clear();
+                if (result.equals("Correct!")) {
+                    numCorrect += 1;
+                }
+                getQuestion();
+
+            } else if (keyH.nextPressed == true && numCorrect == 5){
+                gp.gameState = gp.playing;
+            } 
+        
         
         }
+
+        
 
        // displayResult(g2);
     }
@@ -111,16 +131,13 @@ public class PolygonGuessingGame extends Minigame{
     private void getResult() {
         switch (keyH.userAns) {
             case 1:
-                keyH.userAns = 0;
                 userAns = opt1;
                 break;
 
             case 2:
-                keyH.userAns = 0;
                 userAns = opt2;
                 break;
             case 3:
-                keyH.userAns =0;
                 userAns = opt3;
                 break;
             default:
@@ -128,7 +145,6 @@ public class PolygonGuessingGame extends Minigame{
                 break;
         }
         if (userAns!=null && userAns.equals(correctAns)) {
-            numCorrect += 1;
             result = "Correct!";
         } else {
             result = "Incorrect. Correct answer: " + correctAns;

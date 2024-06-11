@@ -48,7 +48,6 @@ public class KeyHandler implements KeyListener{
             if (code == KeyEvent.VK_ENTER) {
                 nextPressed = true;
             }
-
         }
         if (gp.gameState == gp.minigame) {
             if (code == KeyEvent.VK_1) {
@@ -62,6 +61,9 @@ public class KeyHandler implements KeyListener{
             if (code == KeyEvent.VK_3) {
                 userAns = 3;
                 answered = true;
+            }
+            if (code == KeyEvent.VK_ENTER) {
+                nextPressed = true;
             }
         }
 
@@ -90,6 +92,11 @@ public class KeyHandler implements KeyListener{
                 nextPressed = false;
             }
 
+        }
+        if (gp.gameState == gp.minigame) {
+            if (code == KeyEvent.VK_ENTER) {
+                nextPressed = false;
+            }
         }
     }
 }
