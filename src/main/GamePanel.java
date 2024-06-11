@@ -137,10 +137,10 @@ public class GamePanel extends JPanel implements Runnable{
         return oppNum;
     }
     
-    public boolean hasFought(int opp) {
+    public boolean hasFought() {
         boolean fought = false;
         for (int element : completed) {
-            if (opp == element) {
+            if (determineCollision() == element) {
                 fought = true;
                 return fought;
             }

@@ -37,7 +37,7 @@ public class KeyHandler implements KeyListener{
                 rightPressed = true;
             }
             if(code == KeyEvent.VK_F) {
-                if (gp.determineCollision() > 0 && gp.hasFought(gp.determineCollision()) == false) {
+                if (gp.determineCollision() > 0 && gp.hasFought() == false) {
                     gp.gameState = gp.dialogue;
                     gp.completed.add(gp.determineCollision());
                     
@@ -93,6 +93,7 @@ public class KeyHandler implements KeyListener{
             }
 
         }
+
         if (gp.gameState == gp.minigame) {
             if (code == KeyEvent.VK_ENTER) {
                 nextPressed = false;

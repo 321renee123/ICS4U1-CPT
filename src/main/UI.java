@@ -22,6 +22,7 @@ public class UI {
 
     public void draw(Graphics2D g2) {
 
+
         if (gp.gameState == gp.playing) {
             displayFightText(g2);
         } else if (gp.gameState == gp.dialogue) {
@@ -33,7 +34,7 @@ public class UI {
         g2.setFont(new Font("Courier", Font.PLAIN, 30));
         g2.setColor(Color.red);
         if (gp.determineCollision() > 0) {
-            if (gp.hasFought(gp.determineCollision()) == false) {
+            if (gp.hasFought() == false) {
                 g2.drawString("Press [F] to fight",350,700);
             }
         }
@@ -101,7 +102,7 @@ public class UI {
         int textx = gp.displayedTile*2 + 20;
         int texty = gp.displayedTile;
 
-        if (i < 5) {
+        if (i < 6) {
             for (String line : getBrokenLine(getVoicelines().get(i))) {
                 g2.drawString(line, textx, texty);
                 texty += 25;
@@ -113,6 +114,7 @@ public class UI {
             }
         } else {
             gp.gameState = gp.minigame;
+            i = 0;
         }
 
         

@@ -102,7 +102,7 @@ public class PolygonGuessingGame extends Minigame{
         getResult();
         if (userAns!=null && userAns.length()!=0) {
             g2.setFont(new Font("Courier",Font.PLAIN, 30));
-            g2.setColor(Color.red);
+            g2.setColor(Color.white);
             g2.drawString(result, gp.displayedTile*3 - 10, gp.displayedTile*9);
             g2.drawString("Press [ENTER] to proceed", gp.displayedTile*3 - 10, gp.displayedTile*9 + 20);
 
@@ -117,6 +117,7 @@ public class PolygonGuessingGame extends Minigame{
                 getQuestion();
 
             } else if (keyH.nextPressed == true && numCorrect == 5){
+                keyH.nextPressed = false;
                 gp.gameState = gp.playing;
             } 
         
