@@ -3,10 +3,11 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import java.awt.Graphics2D;
 
 import main.GamePanel;
 
-public class Character {
+public abstract class Character {
     GamePanel gp;
     public int x,y;
     public int speed;
@@ -16,6 +17,8 @@ public class Character {
     public Character(GamePanel gp) {
         this.gp = gp;
     }
+    
+    public abstract void draw(Graphics2D g2);
 
     public BufferedImage getImage(String imagePath) {
         BufferedImage image = null;

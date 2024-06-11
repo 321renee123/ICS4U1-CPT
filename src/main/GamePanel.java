@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 import character.*;
+import minigames.*;
 
 public class GamePanel extends JPanel implements Runnable{
 
@@ -13,8 +14,8 @@ public class GamePanel extends JPanel implements Runnable{
     public final int displayedTile = actualTile*scale; // 64x64 tile
     final int col = 16;
     final int row = 12;
-    final int width = displayedTile * col;
-    final int height = displayedTile * row;
+    public final int width = displayedTile * col;
+    public final int height = displayedTile * row;
 
     // SYSTEM SETUP
     int FPS = 60;
@@ -31,7 +32,7 @@ public class GamePanel extends JPanel implements Runnable{
     OpponentThree opp3 = new OpponentThree(this);
     OpponentFour opp4 = new OpponentFour(this);
     ArrayList<Integer> completed = new ArrayList<Integer>();
-
+    PolygonGuessingGame pgg = new PolygonGuessingGame(this, keyH);
 
 
 
@@ -65,50 +66,29 @@ public class GamePanel extends JPanel implements Runnable{
         double drawInterval =  1000000000/FPS; // 0.016666.... seconds
         double nextDrawTime = System.nanoTime() + drawInterval;
 
-        do {
-            while (gameThread != null) { // when thread is running
+        while (gameThread != null) { // when thread is running
 
-                // UPDATE: update info like change in character position
-                update();
-    
-                // DRAW: draw the screen with updated info 
-                repaint();
-    
-                if (gameState == minigame) {
-                    break;
+            // UPDATE: update info like change in character position
+            update();
+
+            // DRAW: draw the screen with updated info 
+            repaint();
+
+
+            try {
+                double remainingTime = nextDrawTime - System.nanoTime();
+                remainingTime = remainingTime/1000000;
+                if (remainingTime <0) {
+                    remainingTime = 0;
                 }
-    
-                try {
-                    double remainingTime = nextDrawTime - System.nanoTime();
-                    remainingTime = remainingTime/1000000;
-                    if (remainingTime <0) {
-                        remainingTime = 0;
-                    }
-    
-                    Thread.sleep((long) remainingTime);
-    
-                    nextDrawTime += drawInterval;
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+
+                Thread.sleep((long) remainingTime);
+
+                nextDrawTime += drawInterval;
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
-            switch (determineCollision()) {
-                case 1:
-                    break;
-
-                case 2:
-                    break;
-
-                case 3:
-                    break;
-
-                case 4:
-                    opp4.runMinigame();
-                    gameState = playing;
-                    break;
-            }
-        } while (gameOver = false);
-
+        }
 
     } 
 
@@ -136,8 +116,9 @@ public class GamePanel extends JPanel implements Runnable{
         opp3.draw(g2);
         opp4.draw(g2);
         player.draw(g2);
-        //player.checkCollision();
         ui.draw(g2);
+        pgg.draw(g2);
+        
 
         g2.dispose(); // save memory
     }

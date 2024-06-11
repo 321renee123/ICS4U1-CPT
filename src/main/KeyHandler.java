@@ -7,6 +7,9 @@ public class KeyHandler implements KeyListener{
 
     public boolean upPressed, downPressed, leftPressed, rightPressed;
     public boolean nextPressed;
+    public int userAns;
+    public boolean answered = false;
+
     
 
     public KeyHandler(GamePanel gp) {
@@ -46,6 +49,20 @@ public class KeyHandler implements KeyListener{
                 nextPressed = true;
             }
 
+        }
+        if (gp.gameState == gp.minigame) {
+            if (code == KeyEvent.VK_1) {
+                userAns = 1;
+                answered = true;
+            }
+            if (code == KeyEvent.VK_2) {
+                userAns = 2;
+                answered = true;
+            }
+            if (code == KeyEvent.VK_3) {
+                userAns = 3;
+                answered = true;
+            }
         }
 
     }
