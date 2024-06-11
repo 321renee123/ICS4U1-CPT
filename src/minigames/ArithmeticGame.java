@@ -3,7 +3,6 @@ package minigames;
 import main.*;
 import java.awt.*;
 import java.util.*;
-import java.awt.image.BufferedImage;
 
 public class ArithmeticGame extends Minigame{
 
@@ -100,7 +99,9 @@ public class ArithmeticGame extends Minigame{
         super.drawBackground(g2);
         g2.setColor(Color.white);
         g2.setFont(new Font("Courier", Font.PLAIN, 30));
-        g2.drawString(equation, super.x + (gp.displayedTile*2),super.y + (gp.displayedTile*2));
+        g2.drawString("Type the number associated with", super.x+ gp.displayedTile,super.y+gp.displayedTile);
+        g2.drawString("your answer", super.x+ gp.displayedTile,super.y+gp.displayedTile + 30);
+        g2.drawString(equation, super.x + gp.displayedTile,super.y + (gp.displayedTile*3));
 
         g2.setFont(new Font("Courier", Font.PLAIN, 30));
         g2.setColor(Color.white);
@@ -111,12 +112,12 @@ public class ArithmeticGame extends Minigame{
         getResult();
 
         if (userAns != -1) {
-            g2.setFont(new Font("Courier", Font.PLAIN, 30));
             g2.setColor(Color.white);
+            g2.setFont(new Font("Courier", Font.PLAIN, 30));
             g2.drawString(result, gp.displayedTile*3-10, gp.displayedTile*9);
-            g2.drawString("Press [ENTER] to proceed",gp.displayedTile*3-10,gp.displayedTile*9+20);
+            g2.drawString("Press [ENTER] to proceed",gp.displayedTile*3-10,gp.displayedTile*9+30);
 
-            if (keyH.nextPressed == true && numCorrect < 4) {
+            if (keyH.nextPressed == true && numCorrect < 5) {
                 keyH.nextPressed = false;
                 userAns = -1;
                 keyH.userAns = 0;

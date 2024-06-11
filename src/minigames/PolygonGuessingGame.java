@@ -87,7 +87,9 @@ public class PolygonGuessingGame extends Minigame{
         super.drawBackground(g2);
         g2.setColor(Color.white);
         g2.setFont(new Font("Courier",Font.PLAIN,30));
-        g2.drawString("Name the polygon:", super.x+gp.displayedTile, super.y+gp.displayedTile);
+        g2.drawString("Type the number associated with", super.x+ gp.displayedTile,super.y+gp.displayedTile);
+        g2.drawString("your answer", super.x+ gp.displayedTile,super.y+gp.displayedTile + 30);
+        g2.drawString("Name the polygon:", super.x+gp.displayedTile, super.y+gp.displayedTile+70);
 
         g2.setColor(new Color(255,255,255,255));
         g2.fillPolygon(xPoints, yPoints, sides);
@@ -97,13 +99,14 @@ public class PolygonGuessingGame extends Minigame{
         g2.drawString("2 - " + opt2, opt2x, opty);
         g2.drawString("3 - " + opt3, opt3x, opty);
         getResult();
-        if (userAns!=null && userAns.length()!=0) {
-            g2.setFont(new Font("Courier",Font.PLAIN, 30));
-            g2.setColor(Color.white);
-            g2.drawString(result, gp.displayedTile*3 - 10, gp.displayedTile*9);
-            g2.drawString("Press [ENTER] to proceed", gp.displayedTile*3 - 10, gp.displayedTile*9 + 20);
 
-            if (keyH.nextPressed == true && numCorrect < 4) {
+        if (userAns!=null && userAns.length()!=0) {
+            g2.setColor(Color.white);
+            g2.setFont(new Font("Courier", Font.PLAIN, 30));
+            g2.drawString(result, gp.displayedTile*3 - 10, gp.displayedTile*9);
+            g2.drawString("Press [ENTER] to proceed", gp.displayedTile*3 - 10, gp.displayedTile*9 + 30);
+
+            if (keyH.nextPressed == true && numCorrect < 5) {
                 keyH.nextPressed = false;
                 userAns = null;
                 keyH.userAns = 0;

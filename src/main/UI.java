@@ -25,14 +25,25 @@ public class UI {
 
         if (gp.gameState == gp.playing) {
             displayFightText(g2);
+            displayOpponentsAndInstruction(g2);
+
         } else if (gp.gameState == gp.dialogue) {
             displayDialogue(g2);
         }
     }
 
+    private void displayOpponentsAndInstruction(Graphics2D g2) {
+        g2.setFont(new Font("Courier", Font.BOLD, 30));
+        g2.setColor(Color.white);
+        g2.drawString(gp.completed.size() + "/4 opponents defeated",315,60);
+        if (gp.completed.size() == 0) {
+            g2.drawString("Try approaching a monster",300,90);
+        }
+    }
+
     private void displayFightText(Graphics2D g2) {
-        g2.setFont(new Font("Courier", Font.PLAIN, 30));
-        g2.setColor(Color.red);
+        g2.setFont(new Font("Courier", Font.BOLD, 30));
+        g2.setColor(Color.white);
         if (gp.determineCollision() > 0) {
             if (gp.hasFought() == false) {
                 g2.drawString("Press [F] to fight",350,700);

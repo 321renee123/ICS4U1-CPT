@@ -35,6 +35,7 @@ public class GamePanel extends JPanel implements Runnable{
     PolygonGuessingGame pgg = new PolygonGuessingGame(this, keyH);
     FlagGuessingGame fgg = new FlagGuessingGame(this,keyH);
     ArithmeticGame ag = new ArithmeticGame(this,keyH);
+    SynonymFindingGame sfg = new SynonymFindingGame(this,keyH);
 
 
 
@@ -117,6 +118,7 @@ public class GamePanel extends JPanel implements Runnable{
         pgg.draw(g2);
         fgg.draw(g2);
         ag.draw(g2);
+        sfg.draw(g2);
         
 
         g2.dispose(); // save memory

@@ -38,7 +38,7 @@ public class FlagGuessingGame extends Minigame {
     }
 
     private void getRandomFlag() {
-        correctAns = flags[rand.nextInt(7)];
+        correctAns = flags[rand.nextInt(9)];
         flag = getImage("/res/minigame_assets/" + correctAns);
         usedFlags.add(correctAns);
     }
@@ -72,26 +72,28 @@ public class FlagGuessingGame extends Minigame {
         super.drawBackground(g2);
         g2.setColor(Color.white);
         g2.setFont(new Font("Courier", Font.PLAIN, 30));
-        g2.drawString("Name the country:",super.x + gp.displayedTile, super.y+gp.displayedTile);
+        g2.drawString("Type the number associated with", super.x+ gp.displayedTile,super.y+gp.displayedTile);
+        g2.drawString("your answer", super.x+ gp.displayedTile,super.y+gp.displayedTile + 30);
+        g2.drawString("Name the country:",super.x + gp.displayedTile, super.y+gp.displayedTile + 70);
 
-        g2.drawImage(flag, 320,192,gp.displayedTile*3,gp.displayedTile*3, null);
+        g2.drawImage(flag, 420,280,gp.displayedTile*3,gp.displayedTile*3, null);
 
         g2.setFont(new Font("Courier", Font.PLAIN, 20));
         g2.setColor(Color.white);
-        g2.drawString("1 - " + opt1, opt1x,opty);
-        g2.drawString("2 - " + opt2, opt2x, opty);
-        g2.drawString("3 - " + opt3, opt3x, opty);
+        g2.drawString("1 - " + opt1.toUpperCase(), opt1x,opty);
+        g2.drawString("2 - " + opt2.toUpperCase(), opt2x, opty);
+        g2.drawString("3 - " + opt3.toUpperCase(), opt3x, opty);
 
         getResult();
 
         if (userAns!= null && userAns.length()!=0) {
-            g2.setFont(new Font("Courier",Font.PLAIN,30));
             g2.setColor(Color.white);
+            g2.setFont(new Font("Courier", Font.PLAIN, 30));
             g2.drawString(result, gp.displayedTile*3-10,gp.displayedTile*9);
-            g2.drawString("Press [ENTER] to proceed",gp.displayedTile*3-10,gp.displayedTile*9+20);
+            g2.drawString("Press [ENTER] to proceed",gp.displayedTile*3-10,gp.displayedTile*9+30);
 
             
-            if (keyH.nextPressed == true && numCorrect < 4) {
+            if (keyH.nextPressed == true && numCorrect < 5) {
                 keyH.nextPressed = false;
                 userAns = null;
                 keyH.userAns = 0;

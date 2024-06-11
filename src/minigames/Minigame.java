@@ -69,5 +69,6 @@ public abstract class Minigame {
         }
         return image;
     }
+
     
 }
