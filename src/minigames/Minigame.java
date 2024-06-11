@@ -36,6 +36,16 @@ public abstract class Minigame {
         return repeated;
     }
 
+    public boolean checkForRepeats(ArrayList<Integer> list, int line) {
+        boolean repeated = false;
+        for (int element: list) {
+            if (line == element) {
+                repeated = true;
+            }
+        }    
+        return repeated;
+    }
+
     public void drawBackground(Graphics2D g2) {
         x = gp.displayedTile*2;
         y= gp.displayedTile*2;

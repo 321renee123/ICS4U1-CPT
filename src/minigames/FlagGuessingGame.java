@@ -19,7 +19,6 @@ public class FlagGuessingGame extends Minigame {
     private int numCorrect;
     private String result;
     private BufferedImage flag;
-    private int centerX,centerY;
 
     public FlagGuessingGame(GamePanel gp, KeyHandler keyH) {
         super(gp);
@@ -39,8 +38,6 @@ public class FlagGuessingGame extends Minigame {
     }
 
     private void getRandomFlag() {
-        centerX = gp.width / 2;  // Center X coordinate of the panel
-        centerY = gp.height / 2;  // Center Y coordinate of the panel
         correctAns = flags[rand.nextInt(7)];
         flag = getImage("/res/minigame_assets/" + correctAns);
         usedFlags.add(correctAns);
@@ -65,19 +62,19 @@ public class FlagGuessingGame extends Minigame {
 
     
 
-    public void getQuestion() {
+    private void getQuestion() {
         getRandomFlag();
         generateOptions();
         getMultipleChoice();
     }
 
-    public void showQuestion(Graphics2D g2) {
+    private void showQuestion(Graphics2D g2) {
         super.drawBackground(g2);
         g2.setColor(Color.white);
         g2.setFont(new Font("Courier", Font.PLAIN, 30));
         g2.drawString("Name the country:",super.x + gp.displayedTile, super.y+gp.displayedTile);
 
-        g2.drawImage(flag, centerX,centerY,gp.displayedTile*3,gp.displayedTile*3, null);
+        g2.drawImage(flag, 320,192,gp.displayedTile*3,gp.displayedTile*3, null);
 
         g2.setFont(new Font("Courier", Font.PLAIN, 20));
         g2.setColor(Color.white);
