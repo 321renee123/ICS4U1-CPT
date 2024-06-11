@@ -10,7 +10,7 @@ public class FlagGuessingGame extends Minigame {
     private KeyHandler keyH;
     private Random rand = new Random();
 
-    private String[] flags = {"america","canada","china","france","ireland","italy","japan", "south korea","uk","ukraine"};
+    private String[] flags = {"america","canada","india","france","ireland","italy","japan", "south korea","uk","ukraine"};
     private ArrayList<String> usedFlags = new ArrayList<String>();
     private String correctAns;
     private String opt1, opt2, opt3;
