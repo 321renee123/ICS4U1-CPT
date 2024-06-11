@@ -1,19 +1,29 @@
 package minigames;
 
 import java.util.ArrayList;
+
+import javax.imageio.ImageIO;
+
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+
 import main.*;
 
 public abstract class Minigame {
 
-    public abstract void update();
-    public abstract void draw(Graphics2D g2);
     GamePanel gp;
     public int x,y;
+
+    public abstract void draw(Graphics2D g2);
+
+
 
     public Minigame(GamePanel gp) {
         this.gp = gp;
     }
+
+
     
 
     public boolean checkForRepeats(ArrayList<String> list, String line) {
@@ -37,6 +47,17 @@ public abstract class Minigame {
         g2.fillRoundRect(x,y,width,height,35,35);
 
         
+    }
+
+    public BufferedImage getImage(String imagePath) {
+        BufferedImage image = null;
+        try {
+            image = ImageIO.read(getClass().getResourceAsStream(imagePath + ".jpg"));
+            return image;
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
+        return image;
     }
     
 }

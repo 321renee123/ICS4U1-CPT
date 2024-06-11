@@ -33,6 +33,7 @@ public class GamePanel extends JPanel implements Runnable{
     OpponentFour opp4 = new OpponentFour(this);
     ArrayList<Integer> completed = new ArrayList<Integer>();
     PolygonGuessingGame pgg = new PolygonGuessingGame(this, keyH);
+    FlagGuessingGame fgg = new FlagGuessingGame(this,keyH);
 
 
 
@@ -118,6 +119,7 @@ public class GamePanel extends JPanel implements Runnable{
         player.draw(g2);
         ui.draw(g2);
         pgg.draw(g2);
+        fgg.draw(g2);
         
 
         g2.dispose(); // save memory

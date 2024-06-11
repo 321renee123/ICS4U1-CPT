@@ -38,7 +38,4 @@ public class OpponentOne extends Character {
         g2.drawImage(image, x, y, gp.displayedTile, gp.displayedTile, null);
     }
 
-    public void runMinigame() {
-        
-    }
 }

@@ -3,6 +3,7 @@ package minigames;
 import java.util.*;
 import java.awt.*;
 import main.*;
+
 public class PolygonGuessingGame extends Minigame{
 
     private String[] polygons = {"triangle","quadrilateral","pentagon","hexagon","heptagon","octogon","nonagon","decagon"};
@@ -17,8 +18,8 @@ public class PolygonGuessingGame extends Minigame{
     private int numCorrect;
     private String result;
 
-    KeyHandler keyH;
-    Random rand = new Random();
+    private KeyHandler keyH;
+    private Random rand = new Random();
 
     public PolygonGuessingGame(GamePanel gp, KeyHandler keyH) {
         super(gp);
@@ -31,9 +32,6 @@ public class PolygonGuessingGame extends Minigame{
         opty = gp.displayedTile*8;
     }
 
-    public void update() {
-
-    }
 
     public void draw(Graphics2D g2) {
         if (gp.gameState == gp.minigame && gp.determineCollision() == 4) {
@@ -91,8 +89,7 @@ public class PolygonGuessingGame extends Minigame{
         g2.setFont(new Font("Courier",Font.PLAIN,30));
         g2.drawString("Name the polygon:", super.x+gp.displayedTile, super.y+gp.displayedTile);
 
-        Color c = new Color(255,255,255,255);
-        g2.setColor(c);
+        g2.setColor(new Color(255,255,255,255));
         g2.fillPolygon(xPoints, yPoints, sides);
 
         g2.setFont(new Font("Courier",Font.PLAIN,20));
@@ -106,7 +103,7 @@ public class PolygonGuessingGame extends Minigame{
             g2.drawString(result, gp.displayedTile*3 - 10, gp.displayedTile*9);
             g2.drawString("Press [ENTER] to proceed", gp.displayedTile*3 - 10, gp.displayedTile*9 + 20);
 
-            if (keyH.nextPressed == true && numCorrect < 5) {
+            if (keyH.nextPressed == true && numCorrect < 4) {
                 keyH.nextPressed = false;
                 userAns = null;
                 keyH.userAns = 0;
@@ -116,8 +113,9 @@ public class PolygonGuessingGame extends Minigame{
                 }
                 getQuestion();
 
-            } else if (keyH.nextPressed == true && numCorrect == 5){
+            } else if (keyH.nextPressed == true){
                 keyH.nextPressed = false;
+                keyH.userAns = 0;
                 gp.gameState = gp.playing;
             } 
         

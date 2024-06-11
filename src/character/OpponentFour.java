@@ -12,7 +12,6 @@ public class OpponentFour extends Character {
 
     // PolygonGuessing polygonGuessing = new PolygonGuessing();
     public boolean completedRun;
-    private int score;
 
 
     public OpponentFour(GamePanel gp) {
@@ -21,8 +20,6 @@ public class OpponentFour extends Character {
         setDefaultValues();
         getOpponentImage();   
         
-        completedRun = false;
-        score = 0;
     }
 
     public void setDefaultValues() {
@@ -40,6 +37,5 @@ public class OpponentFour extends Character {
         g2.drawImage(image, x, y, gp.displayedTile, gp.displayedTile, null);
     }
 
-    public static void runMinigame() {
-    }
+
 }

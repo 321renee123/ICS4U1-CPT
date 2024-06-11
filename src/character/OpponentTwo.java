@@ -36,8 +36,4 @@ public class OpponentTwo extends Character {
         g2.drawImage(image, x, y, gp.displayedTile, gp.displayedTile, null);
     }
 
-
-    public void runMinigame() {
-
-    }
 }
