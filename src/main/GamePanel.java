@@ -31,7 +31,7 @@ public class GamePanel extends JPanel implements Runnable{
     OpponentTwo opp2 = new OpponentTwo(this);
     OpponentThree opp3 = new OpponentThree(this);
     OpponentFour opp4 = new OpponentFour(this);
-    ArrayList<Integer> completed = new ArrayList<Integer>();
+    public ArrayList<Integer> completed = new ArrayList<Integer>();
     PolygonGuessingGame pgg = new PolygonGuessingGame(this, keyH);
     FlagGuessingGame fgg = new FlagGuessingGame(this,keyH);
     ArithmeticGame ag = new ArithmeticGame(this,keyH);
@@ -40,9 +40,11 @@ public class GamePanel extends JPanel implements Runnable{
 
 
     // GAME STATE
-    public final int playing = 1;
-    public final int dialogue = 2; 
-    public final int minigame = 3;
+    public final int intro = 1;
+    public final int playing = 2;
+    public final int dialogue = 3; 
+    public final int minigame = 4;
+    public final int end = 5;
     public int gameState;
 
 
@@ -57,7 +59,7 @@ public class GamePanel extends JPanel implements Runnable{
         this.setFocusable(true);
 
         gameOver = false;
-        gameState = playing;
+        gameState = intro;
     }
 
     public void startGameThread() {

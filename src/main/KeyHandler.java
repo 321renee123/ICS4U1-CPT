@@ -23,6 +23,12 @@ public class KeyHandler implements KeyListener{
     public void keyPressed(KeyEvent e) {
         int code = e.getKeyCode();
 
+
+        if (gp.gameState == gp.intro) {
+            if (code == KeyEvent.VK_ENTER) {
+                nextPressed = true;
+            }
+        }
         if (gp.gameState == gp.playing) {
             if(code == KeyEvent.VK_W) {
                 upPressed = true;

@@ -119,7 +119,7 @@ public class PolygonGuessingGame extends Minigame{
             } else if (keyH.nextPressed == true){
                 keyH.nextPressed = false;
                 keyH.userAns = 0;
-                gp.gameState = gp.playing;
+                super.changeGameState();
             } 
         
         

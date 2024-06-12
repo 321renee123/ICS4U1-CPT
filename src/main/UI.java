@@ -3,6 +3,11 @@ import java.awt.*;
 import java.io.*;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
+import java.net.URL;
+
+import java.awt.image.BufferedImage;
+
 public class UI {
 
     FileReader in;
@@ -13,7 +18,9 @@ public class UI {
     GamePanel gp;
     KeyHandler keyH;
     Font courier_1;    
-    int i = 0;
+    int lineCounter = 0;
+    int introCounter = 0;
+    BufferedImage introSlide;
 
     public UI(GamePanel gp, KeyHandler keyH) {
         this.gp = gp;
@@ -22,6 +29,9 @@ public class UI {
 
     public void draw(Graphics2D g2) {
 
+        if (gp.gameState == gp.intro) {
+            displayIntro(g2);
+        }
 
         if (gp.gameState == gp.playing) {
             displayFightText(g2);
@@ -30,6 +40,27 @@ public class UI {
         } else if (gp.gameState == gp.dialogue) {
             displayDialogue(g2);
         }
+    }
+
+    private void displayIntro(Graphics2D g2) {
+        URL resource;
+        try {
+            introSlide = ImageIO.read(UI.class.getResource("/res/intro/intro" + String.valueOf(introCounter) + ".png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        g2.drawImage(introSlide,0,0,gp.width,gp.height,null);
+        if (keyH.nextPressed == true) {
+            keyH.nextPressed = false;
+            if (introCounter<7) {
+                introCounter += 1;
+            } else {
+                gp.gameState = gp.playing;
+            }
+
+        }
+        
+
     }
 
     private void displayOpponentsAndInstruction(Graphics2D g2) {
@@ -113,19 +144,19 @@ public class UI {
         int textx = gp.displayedTile*2 + 20;
         int texty = gp.displayedTile;
 
-        if (i < 6) {
-            for (String line : getBrokenLine(getVoicelines().get(i))) {
+        if (lineCounter < 6) {
+            for (String line : getBrokenLine(getVoicelines().get(lineCounter))) {
                 g2.drawString(line, textx, texty);
                 texty += 25;
             }
     
             if (keyH.nextPressed == true) {
                 keyH.nextPressed = false;
-                i +=1;
+                lineCounter +=1;
             }
         } else {
             gp.gameState = gp.minigame;
-            i = 0;
+            lineCounter = 0;
         }
 
         

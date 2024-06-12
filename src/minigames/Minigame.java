@@ -70,5 +70,13 @@ public abstract class Minigame {
         return image;
     }
 
+    public void changeGameState() {
+        if (gp.completed.size() == 4) {
+            gp.gameState = gp.end;
+        } else {
+            gp.gameState = gp.playing;
+        }
+    }
+
     
 }
