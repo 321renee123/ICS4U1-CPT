@@ -19,7 +19,7 @@ public class App {
         
         frame.setLayout(null);
 
-        URL bg_url = App.class.getResource("/res/background/bg2.jpg");
+        URL bg_url = App.class.getResource("/res/bg2.jpg");
 
         JLabel bg = new JLabel("",new ImageIcon(bg_url),JLabel.CENTER);
         bg.setSize(gamePanel.width,gamePanel.height);

@@ -29,7 +29,7 @@ public class OpponentFour extends Character {
     }
 
     public void getOpponentImage() {
-        sprite = getImage("/res/opponents/opponentFour");
+        sprite = getImage("/res/characters/opponentFour");
     }
 
     public void draw(Graphics2D g2) {

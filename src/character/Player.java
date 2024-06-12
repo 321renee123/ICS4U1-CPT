@@ -21,7 +21,7 @@ public class Player extends Character{
     }
 
     public void getPlayerImage() {
-        sprite = getImage("/res/player");
+        sprite = getImage("/res/characters/player");
     }
 
     public void update() {
