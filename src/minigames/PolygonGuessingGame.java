@@ -6,7 +6,7 @@ import main.*;
 
 public class PolygonGuessingGame extends Minigame{
 
-    private String[] polygons = {"triangle","quadrilateral","pentagon","hexagon","heptagon","octogon","nonagon","decagon"};
+    private String[] polygons = {"triangle","quadrilateral","pentagon","hexagon","heptagon","octagon","nonagon","decagon"};
     private ArrayList<String> usedPolygons = new ArrayList<String>();
     private int sides;
 
