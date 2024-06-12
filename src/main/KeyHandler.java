@@ -24,7 +24,7 @@ public class KeyHandler implements KeyListener{
         int code = e.getKeyCode();
 
 
-        if (gp.gameState == gp.intro) {
+        if (gp.gameState == gp.intro || gp.gameState == gp.outro) {
             if (code == KeyEvent.VK_ENTER) {
                 nextPressed = true;
             }

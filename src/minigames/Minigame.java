@@ -72,7 +72,7 @@ public abstract class Minigame {
 
     public void changeGameState() {
         if (gp.completed.size() == 4) {
-            gp.gameState = gp.end;
+            gp.gameState = gp.outro;
         } else {
             gp.gameState = gp.playing;
         }

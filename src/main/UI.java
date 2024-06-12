@@ -4,7 +4,6 @@ import java.io.*;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
-import java.net.URL;
 
 import java.awt.image.BufferedImage;
 
@@ -20,7 +19,8 @@ public class UI {
     Font courier_1;    
     int lineCounter = 0;
     int introCounter = 0;
-    BufferedImage introSlide;
+    int outroCounter = 0;
+    BufferedImage slide;
 
     public UI(GamePanel gp, KeyHandler keyH) {
         this.gp = gp;
@@ -37,19 +37,25 @@ public class UI {
             displayFightText(g2);
             displayOpponentsAndInstruction(g2);
 
-        } else if (gp.gameState == gp.dialogue) {
+        } 
+        
+        if (gp.gameState == gp.dialogue) {
             displayDialogue(g2);
         }
+
+        if (gp.gameState == gp.outro) {
+            displayOutro(g2);
+        }
+
     }
 
     private void displayIntro(Graphics2D g2) {
-        URL resource;
         try {
-            introSlide = ImageIO.read(UI.class.getResource("/res/intro/intro" + String.valueOf(introCounter) + ".png"));
+            slide = ImageIO.read(UI.class.getResource("/res/intro/intro" + String.valueOf(introCounter) + ".png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        g2.drawImage(introSlide,0,0,gp.width,gp.height,null);
+        g2.drawImage(slide,0,0,gp.width,gp.height,null);
         if (keyH.nextPressed == true) {
             keyH.nextPressed = false;
             if (introCounter<7) {
@@ -59,8 +65,24 @@ public class UI {
             }
 
         }
-        
+    }
 
+    private void displayOutro(Graphics2D g2) {
+        try {
+            slide = ImageIO.read(UI.class.getResource("/res/outro/outro" + String.valueOf(outroCounter) + ".png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        g2.drawImage(slide,0,0,gp.width,gp.height,null);
+        if (keyH.nextPressed == true) {
+            keyH.nextPressed = false;
+            if (outroCounter<6) {
+                outroCounter += 1;
+            } else {
+                gp.gameState = gp.playing;
+            }
+
+        }
     }
 
     private void displayOpponentsAndInstruction(Graphics2D g2) {
