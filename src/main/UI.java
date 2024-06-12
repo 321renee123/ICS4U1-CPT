@@ -90,7 +90,7 @@ public class UI {
         g2.setColor(Color.white);
         g2.drawString(gp.completed.size() + "/4 opponents defeated",315,60);
         if (gp.completed.size() == 0) {
-            g2.drawString("Try approaching a monster",300,90);
+            g2.drawString("Try approaching a monster (WASD)",240,90);
         }
     }
 
