@@ -21,7 +21,7 @@ public class SynonymFindingGame extends Minigame{
     private String result;
 
 
-    private int opt1x,opt2x,opt3x,opty;
+    private int opty;
 
     Random rand = new Random();
 
@@ -29,9 +29,6 @@ public class SynonymFindingGame extends Minigame{
     public SynonymFindingGame(GamePanel gp, KeyHandler keyH) {
         super(gp);
         this.keyH = keyH;
-        opt1x = gp.displayedTile*3 ;
-        opt2x = gp.displayedTile*7 ;
-        opt3x = gp.displayedTile*11 -5;
         opty = gp.displayedTile*7;
         getQuestion();
     }

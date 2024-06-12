@@ -13,7 +13,9 @@ import main.*;
 public abstract class Minigame {
 
     GamePanel gp;
+
     public int x,y;
+    public int opt1x,opt2x,opt3x;
 
     public abstract void draw(Graphics2D g2);
 
@@ -21,6 +23,9 @@ public abstract class Minigame {
 
     public Minigame(GamePanel gp) {
         this.gp = gp;
+        opt1x = gp.displayedTile*3;
+        opt2x = gp.displayedTile*7-10;
+        opt3x = gp.displayedTile*11-20;
     }
 
 

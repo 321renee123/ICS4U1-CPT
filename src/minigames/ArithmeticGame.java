@@ -15,7 +15,7 @@ public class ArithmeticGame extends Minigame{
     private int num1,num2;
     private String equation;
     private int opt1, opt2, opt3;
-    private int opt1x,opt2x,opt3x,opty;
+    private int opty;
     private int userAns = -1;
     private int numCorrect;
     private String result;
@@ -24,9 +24,6 @@ public class ArithmeticGame extends Minigame{
     public ArithmeticGame(GamePanel gp, KeyHandler keyH) {
         super(gp);
         this.keyH = keyH;
-        opt1x = gp.displayedTile*3 ;
-        opt2x = gp.displayedTile*7 ;
-        opt3x = gp.displayedTile*11 -5;
         opty = gp.displayedTile*8;
 
         getQuestion();

@@ -166,7 +166,7 @@ public class UI {
         int y = gp.displayedTile/2;
         int width = gp.width - (gp.displayedTile*4);
         int height = gp.displayedTile*3;
-        g2.setFont(new Font("Courier", Font.PLAIN, 40));
+        g2.setFont(new Font("Courier", Font.BOLD, 40));
 
         Color c = new Color(0,0,0,190);
         g2.setColor(c);

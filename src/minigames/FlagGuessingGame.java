@@ -15,7 +15,7 @@ public class FlagGuessingGame extends Minigame {
     private ArrayList<String> usedQs = new ArrayList<String>();
     private String correctAns;
     private String opt1, opt2, opt3;
-    private int opt1x,opt2x,opt3x,opty;
+    private int opty;
     private String userAns;
     private int numCorrect;
     private String result;
@@ -25,9 +25,6 @@ public class FlagGuessingGame extends Minigame {
         super(gp);
         this.keyH = keyH;
         getQuestion();
-        opt1x = gp.displayedTile*3 ;
-        opt2x = gp.displayedTile*7 ;
-        opt3x = gp.displayedTile*11 -5;
         opty = gp.displayedTile*8;
     }
 
