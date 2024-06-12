@@ -46,6 +46,9 @@ public class UI {
         if (gp.gameState == gp.outro) {
             displayOutro(g2);
         }
+        if (gp.gameState == gp.end) {
+            displayEnd(g2);
+        }
 
     }
 
@@ -79,10 +82,21 @@ public class UI {
             if (outroCounter<6) {
                 outroCounter += 1;
             } else {
-                gp.gameState = gp.playing;
+                gp.gameState = gp.end;
             }
 
         }
+    }
+
+    private void displayEnd(Graphics2D g2) {
+        try {
+            slide = ImageIO.read(UI.class.getResource("/res/end.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        g2.drawImage(slide,0,0,gp.width,gp.height,null);
+
     }
 
     private void displayOpponentsAndInstruction(Graphics2D g2) {

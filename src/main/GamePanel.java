@@ -45,6 +45,7 @@ public class GamePanel extends JPanel implements Runnable{
     public final int dialogue = 3; 
     public final int minigame = 4;
     public final int outro = 5;
+    public final int end = 6;
     public int gameState;
 
 
