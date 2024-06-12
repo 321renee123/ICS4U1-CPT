@@ -10,7 +10,7 @@ public class FlagGuessingGame extends Minigame {
     private KeyHandler keyH;
     private Random rand = new Random();
 
-    private String[] flags = {"america","canada","india","france","ireland","italy","japan", "south korea",};
+    private String[] flags = {"america","canada","india","france","ireland","italy","japan", "south korea", "uk"};
     private ArrayList<String> usedFlags = new ArrayList<String>();
     private ArrayList<String> usedQs = new ArrayList<String>();
     private String correctAns;
@@ -37,7 +37,7 @@ public class FlagGuessingGame extends Minigame {
 
     private void getRandomFlag() {
         do {
-            correctAns = flags[rand.nextInt(7)];
+            correctAns = flags[rand.nextInt(8)];
         } while (checkForRepeats(usedQs, correctAns) == true);
         flag = getImage("/res/minigame_assets/" + correctAns);
         usedFlags.add(correctAns);
@@ -47,7 +47,7 @@ public class FlagGuessingGame extends Minigame {
         String option;
         for (int i = 0 ; i < 2; i++) {
             do {
-                option = flags[rand.nextInt(7)];
+                option = flags[rand.nextInt(8)];
             } while(super.checkForRepeats(usedFlags,option) == true);
             usedFlags.add(option);
         }
