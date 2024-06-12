@@ -10,8 +10,9 @@ public class FlagGuessingGame extends Minigame {
     private KeyHandler keyH;
     private Random rand = new Random();
 
-    private String[] flags = {"america","canada","india","france","ireland","italy","japan", "south korea","uk","ukraine"};
+    private String[] flags = {"america","canada","india","france","ireland","italy","japan", "south korea",};
     private ArrayList<String> usedFlags = new ArrayList<String>();
+    private ArrayList<String> usedQs = new ArrayList<String>();
     private String correctAns;
     private String opt1, opt2, opt3;
     private int opt1x,opt2x,opt3x,opty;
@@ -38,7 +39,9 @@ public class FlagGuessingGame extends Minigame {
     }
 
     private void getRandomFlag() {
-        correctAns = flags[rand.nextInt(9)];
+        do {
+            correctAns = flags[rand.nextInt(7)];
+        } while (checkForRepeats(usedQs, correctAns) == true);
         flag = getImage("/res/minigame_assets/" + correctAns);
         usedFlags.add(correctAns);
     }
@@ -93,20 +96,20 @@ public class FlagGuessingGame extends Minigame {
             g2.drawString("Press [ENTER] to proceed",gp.displayedTile*3-10,gp.displayedTile*9+30);
 
             
-            if (keyH.nextPressed == true && numCorrect < 5) {
+            if (keyH.nextPressed == true && numCorrect == 6 && result.equals("Correct!")) {
+                keyH.nextPressed = false;
+                keyH.userAns = 0;
+                super.changeGameState();
+            } else if (keyH.nextPressed == true){
                 keyH.nextPressed = false;
                 userAns = null;
                 keyH.userAns = 0;
                 usedFlags.clear();
                 if (result.equals("Correct!")) {
                     numCorrect += 1;
+                    usedQs.add(correctAns);
                 }
                 getQuestion();
-
-            } else if (keyH.nextPressed == true){
-                keyH.nextPressed = false;
-                keyH.userAns = 0;
-                super.changeGameState();
             } 
         }
     }

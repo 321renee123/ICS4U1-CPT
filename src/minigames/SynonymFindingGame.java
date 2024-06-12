@@ -10,6 +10,7 @@ public class SynonymFindingGame extends Minigame{
     private String[] words = {"assist","brave","calm","delicious","eager","famous","gigantic","happy","idea","kind","lazy","mend","neat","old","polite","quick","rich","tiny","enraged","dangerous"};
     private String[] synonyms = {"help","courageous","tranquil","scrumptious","enthusiastic","renowned","huge","joyous","concept","benevolent","idle","repair","tidy","ancient","courteous","rapid","wealthy","miniscule","furious","perilous"};
     private ArrayList<String> usedWords = new ArrayList<String>();
+    private ArrayList<String> usedQs = new ArrayList<String>();
 
     private int index;
     private String word;
@@ -42,8 +43,10 @@ public class SynonymFindingGame extends Minigame{
     }
 
     private void getWord() {
-        index = rand.nextInt(19);
-        word = words[index];
+        do {
+            index = rand.nextInt(19);
+            word = words[index];
+        } while (checkForRepeats(usedQs,word) == true);
         correctAns = synonyms[index];
 
         usedWords.add(correctAns);
@@ -94,19 +97,21 @@ public class SynonymFindingGame extends Minigame{
             g2.drawString(result, gp.displayedTile*3-10,gp.displayedTile*8);
             g2.drawString("Press [ENTER] to proceed",gp.displayedTile*3-10,gp.displayedTile*8+30);
 
-            if (keyH.nextPressed == true && numCorrect < 5) {
+            if (keyH.nextPressed == true && numCorrect == 6 && result.equals("Correct!")) {
+                keyH.nextPressed = false;
+                keyH.userAns = 0;
+                super.changeGameState();
+            } else if (keyH.nextPressed == true) {
+
                 keyH.nextPressed = false;
                 keyH.userAns = 0;
                 userAns = null;
                 usedWords.clear();
                 if (result.equals("Correct!")) {
                     numCorrect += 1;
+                    usedQs.add(word);
                 }
                 getQuestion();
-            } else if (keyH.nextPressed == true) {
-                keyH.nextPressed = false;
-                keyH.userAns = 0;
-                super.changeGameState();
             }
         }
     }

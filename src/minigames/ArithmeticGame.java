@@ -117,7 +117,12 @@ public class ArithmeticGame extends Minigame{
             g2.drawString(result, gp.displayedTile*3-10, gp.displayedTile*9);
             g2.drawString("Press [ENTER] to proceed",gp.displayedTile*3-10,gp.displayedTile*9+30);
 
-            if (keyH.nextPressed == true && numCorrect < 5) {
+            if (keyH.nextPressed == true && numCorrect == 6 && result.equals("Correct!")) {
+                keyH.nextPressed = false;
+                keyH.userAns = 0;
+                super.changeGameState();
+
+            } else if (keyH.nextPressed == true){
                 keyH.nextPressed = false;
                 userAns = -1;
                 keyH.userAns = 0;
@@ -126,11 +131,6 @@ public class ArithmeticGame extends Minigame{
                     numCorrect += 1;
                 }
                 getQuestion();
-
-            } else if (keyH.nextPressed == true){
-                keyH.nextPressed = false;
-                keyH.userAns = 0;
-                super.changeGameState();
             } 
             
         }

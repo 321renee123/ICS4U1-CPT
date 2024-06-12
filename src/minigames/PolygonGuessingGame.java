@@ -8,6 +8,7 @@ public class PolygonGuessingGame extends Minigame{
 
     private String[] polygons = {"triangle","quadrilateral","pentagon","hexagon","heptagon","octagon","nonagon","decagon"};
     private ArrayList<String> usedPolygons = new ArrayList<String>();
+    private ArrayList<String> usedQs = new ArrayList<String>();
     private int sides;
 
     private String correctAns;
@@ -40,21 +41,23 @@ public class PolygonGuessingGame extends Minigame{
     }
 
     private void getRandomPolygon() {
-        sides = rand.nextInt(8) + 3;
+        do {
+            sides = rand.nextInt(8) + 3;
 
-        xPoints = new int[sides];  // X coordinates of the polygon vertices
-        yPoints = new int[sides];  // Y coordinates of the polygon vertices
-        int radius = 50;  // Radius of the polygon
-        int centerX = gp.width / 2;  // Center X coordinate of the panel
-        int centerY = gp.height / 2;  // Center Y coordinate of the panel
-
-        // Calculate the vertices of the polygon
-        for (int i = 0; i < sides; i++) {
-            double angle = 2 * Math.PI / sides * i;  // Angle for the current vertex
-            xPoints[i] = (int) (centerX + radius * Math.cos(angle));
-            yPoints[i] = (int) (centerY + radius * Math.sin(angle));
-        }
-        correctAns = polygons[sides-3];
+            xPoints = new int[sides];  // X coordinates of the polygon vertices
+            yPoints = new int[sides];  // Y coordinates of the polygon vertices
+            int radius = 50;  // Radius of the polygon
+            int centerX = gp.width / 2;  // Center X coordinate of the panel
+            int centerY = gp.height / 2;  // Center Y coordinate of the panel
+    
+            // Calculate the vertices of the polygon
+            for (int i = 0; i < sides; i++) {
+                double angle = 2 * Math.PI / sides * i;  // Angle for the current vertex
+                xPoints[i] = (int) (centerX + radius * Math.cos(angle));
+                yPoints[i] = (int) (centerY + radius * Math.sin(angle));
+            }
+            correctAns = polygons[sides-3];
+        } while (checkForRepeats(usedQs,correctAns) == true);
         usedPolygons.add(correctAns);
     }
 
@@ -106,20 +109,20 @@ public class PolygonGuessingGame extends Minigame{
             g2.drawString(result, gp.displayedTile*3 - 10, gp.displayedTile*9);
             g2.drawString("Press [ENTER] to proceed", gp.displayedTile*3 - 10, gp.displayedTile*9 + 30);
 
-            if (keyH.nextPressed == true && numCorrect < 5) {
+            if (keyH.nextPressed == true && numCorrect  == 6 && result.equals("Correct!")) {
+                keyH.nextPressed = false;
+                keyH.userAns = 0;
+                super.changeGameState();
+            } else if (keyH.nextPressed == true){
                 keyH.nextPressed = false;
                 userAns = null;
                 keyH.userAns = 0;
                 usedPolygons.clear();
                 if (result.equals("Correct!")) {
                     numCorrect += 1;
+                    usedQs.add(correctAns);
                 }
                 getQuestion();
-
-            } else if (keyH.nextPressed == true){
-                keyH.nextPressed = false;
-                keyH.userAns = 0;
-                super.changeGameState();
             } 
         
         
