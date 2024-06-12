@@ -36,7 +36,6 @@ public class PolygonGuessingGame extends Minigame{
     public void draw(Graphics2D g2) {
         if (gp.gameState == gp.minigame && gp.determineCollision() == 4) {
             showQuestion(g2);
-
         }
     }
 
@@ -98,6 +97,7 @@ public class PolygonGuessingGame extends Minigame{
         g2.drawString("1 - " + opt1, opt1x, opty);
         g2.drawString("2 - " + opt2, opt2x, opty);
         g2.drawString("3 - " + opt3, opt3x, opty);
+        
         getResult();
 
         if (userAns!=null && userAns.length()!=0) {
